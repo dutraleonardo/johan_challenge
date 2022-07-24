@@ -6,7 +6,7 @@ defmodule JohanChallenge.Repo.Migrations.AddCaregiversTable do
       add :id, :uuid, primary_key: true
       add :phone_number, :string
 
-      add :health_center_id,  references(:health_centers, type: :uuid)
+      add :health_center_id, references(:health_centers, type: :uuid)
 
       timestamps()
     end

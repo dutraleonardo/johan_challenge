@@ -9,6 +9,7 @@ defmodule JohanChallenge.Core.Schemas.Caregiver do
   import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type Ecto.UUID
   @required [:phone_number, :health_center_id]
 
   schema "caregivers" do
@@ -24,5 +25,6 @@ defmodule JohanChallenge.Core.Schemas.Caregiver do
     %__MODULE__{}
     |> cast(params, @required)
     |> validate_required(@required)
+    |> unique_constraint(:phone_number)
   end
 end

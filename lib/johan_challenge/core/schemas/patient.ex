@@ -9,6 +9,7 @@ defmodule JohanChallenge.Core.Schemas.Patient do
   import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type Ecto.UUID
   @required [:first_name, :last_name, :address, :city, :country, :state, :postal_code, :health_center_id]
   @optional [:additional_info]
 

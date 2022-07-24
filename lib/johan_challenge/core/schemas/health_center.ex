@@ -25,5 +25,6 @@ defmodule JohanChallenge.Core.Schemas.HealthCenter do
     %__MODULE__{}
     |> cast(params, [:name])
     |> validate_required([:name])
+    |> unique_constraint(:name)
   end
 end

@@ -8,7 +8,9 @@ defmodule JohanChallenge.Core.Schemas.Device do
 
   import Ecto.Changeset
 
-  @required [:sim_sid, :health_center_id, :patients_id]
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type Ecto.UUID
+  @required [:sim_sid, :health_center_id, :patient_id]
 
   schema "devices" do
     field :sim_sid, :string
