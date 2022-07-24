@@ -60,3 +60,5 @@ jobs:
       - name: Run Tests
         run: |
           mix coveralls.github --warnings-as-errors --raise
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
