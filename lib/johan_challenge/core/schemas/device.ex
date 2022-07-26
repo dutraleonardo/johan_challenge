@@ -4,7 +4,7 @@ defmodule JohanChallenge.Core.Schemas.Device do
   """
   use Ecto.Schema
 
-  alias JohanChallenge.Core.Schemas.{HealthCenter, Patient}
+  alias JohanChallenge.Core.Schemas.{Alert, HealthCenter, Patient}
 
   import Ecto.Changeset
 
@@ -18,6 +18,8 @@ defmodule JohanChallenge.Core.Schemas.Device do
     belongs_to :health_center, HealthCenter
     belongs_to :patient, Patient
 
+    has_many :alerts, Alert
+
     timestamps()
   end
 
@@ -26,5 +28,7 @@ defmodule JohanChallenge.Core.Schemas.Device do
     %__MODULE__{}
     |> cast(params, @required)
     |> validate_required(@required)
+    |> foreign_key_constraint(:patient_id)
+    |> foreign_key_constraint(:health_center_id)
   end
 end

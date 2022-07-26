@@ -10,6 +10,7 @@ defmodule JohanChallenge.Core.Schemas.HealthCenter do
   import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type Ecto.UUID
 
   schema "health_centers" do
     field :name, :string
