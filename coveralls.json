@@ -1,0 +1,16 @@
+{
+    "skip_files":
+        [
+            "lib/johan_challenge.ex",
+            "lib/johan_challenge_web.ex",
+            "lib/johan_challenge/application.ex",
+            "lib/johan_challenge/repo.ex",
+            "lib/johan_challenge_web/endpoint.ex",
+            "lib/johan_challenge_web/gettext.ex",
+            "lib/johan_challenge_web/telemetry.ex",
+            "lib/johan_challenge_web/views/error_helpers.ex",
+            "lib/johan_challenge_web/views/layout_view.ex",
+            "lib/johan_challenge_web/controllers/fallback_controller"
+        ]
+}
+  

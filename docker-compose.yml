@@ -12,27 +12,12 @@ services:
       POSTGRES_USER: postgres
 
   web:
-    image: elixir:1.13.2-alpine
-    command: >
-      /bin/sh -c
-      'mix local.hex --force &&
-      mix local.rebar --force &&
-      mix deps.get &&
-      mix ecto.setup &&
-      ./start.sh'
+    build: .
     ports:
-      - '4000:4000'
-    expose:
-      - '4000'
+      - "4000:4000"
+    volumes:
+      - .:/app
     depends_on:
       - postgres
-    working_dir: /app
-    volumes:
-      - ./:/app/
-      - elixir-deps:/app/deps/
-      - elixir-build:/app/_build/
-
 volumes:
   postgres-data: {}
-  elixir-deps: {}
-  elixir-build: {}
