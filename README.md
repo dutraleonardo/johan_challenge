@@ -1,3 +1,4 @@
+[![Elixir Build and Test](https://github.com/dutraleonardo/johan_challenge/actions/workflows/test.yml/badge.svg)](https://github.com/dutraleonardo/johan_challenge/actions/workflows/test.yml)
 # JohanChallenge
 
 ## The Challenge
