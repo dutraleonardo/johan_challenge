@@ -2,7 +2,6 @@ defmodule JohanChallengeWeb.AlertsControllerTest do
   use JohanChallengeWeb.ConnCase, async: false
 
   alias JohanChallenge.Core.Repositories.Alert, as: AlertRepo
-  alias JohanChallenge.Repo
 
   import JohanChallenge.Factory
 
@@ -15,13 +14,13 @@ defmodule JohanChallengeWeb.AlertsControllerTest do
   }
 
   setup %{conn: conn} do
-    device = build(:device)
-    device |> Repo.insert!()
+    context =
+      build(:all)
 
     payload = %{
       status: "received",
       api_version: "v1",
-      sim_sid: device.sim_sid,
+      sim_sid: context.device.sim_sid,
       content: "ALERT DT=2015-07-30T20:00:00Z T=BPM VAL=200 LAT=52.1544408 LON=4.2934847",
       direction: "from_sim"
     }
@@ -32,7 +31,7 @@ defmodule JohanChallengeWeb.AlertsControllerTest do
     }
 
     %{
-      device: device,
+      device: context.device,
       conn: put_req_header(conn, "accept", "application/json"),
       payload: payload,
       invalid_payload: invalid_payload

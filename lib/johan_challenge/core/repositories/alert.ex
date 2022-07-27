@@ -3,7 +3,7 @@ defmodule JohanChallenge.Core.Repositories.Alert do
   Repository to handle alerts queries to database
   """
   alias Ecto.Multi
-  alias JohanChallenge.Core.Schemas.{Alert, AlertAudit}
+  alias JohanChallenge.Core.Schemas.{Alert, AlertAudit, Patient}
   alias JohanChallenge.Core.Utils
   alias JohanChallenge.Repo
 
@@ -94,6 +94,41 @@ defmodule JohanChallenge.Core.Repositories.Alert do
 
         {:ok, result}
     end
+  end
+
+  @spec get_alert_notification(any) :: {:error, <<_::120>>} | {:ok, any}
+  def get_alert_notification(alert_id) do
+    result =
+      alert_notification_query(alert_id)
+      |> Repo.all()
+    case result do
+      [] ->
+        {:error, "Alert not found"}
+
+      alert ->
+        alert =
+          alert
+          |> hd()
+        {:ok, alert}
+    end
+  end
+
+  defp alert_notification_query(alert_id) do
+    from(
+      alert in Alert,
+      inner_join: device in assoc(alert, :device),
+      inner_join: patient in Patient,
+      on: device.patient_id == patient.id ,
+      where: alert.id == ^alert_id,
+      select: %{
+        incident_dt: alert.incident_dt,
+        type: alert.type,
+        first_name: patient.first_name,
+        last_name: patient.last_name,
+        additional_info: patient.additional_info,
+        patient_id: patient.id
+        }
+    )
   end
 
   def filter(filters, page_opts) do
