@@ -2,8 +2,8 @@ defmodule JohanChallengeWeb.AlertsController do
   use JohanChallengeWeb, :controller
 
   alias JohanChallenge.Core.Repositories.Alert, as: AlertRepo
-  alias JohanChallenge.Core.Repositories.Device, as: DeviceRepo
   alias JohanChallenge.Core.Repositories.Caregiver, as: CaregiverRepo
+  alias JohanChallenge.Core.Repositories.Device, as: DeviceRepo
   alias JohanChallenge.Core.Services.Alert, as: AlertService
   alias JohanChallenge.Notifier.SMS
 
