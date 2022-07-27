@@ -7,6 +7,8 @@ defmodule JohanChallenge.Core.Repositories.Alert do
   alias JohanChallenge.Core.Utils
   alias JohanChallenge.Repo
 
+  import Ecto.Query
+
   require Logger
 
   @spec insert_alert(%{optional(:__struct__) => none, optional(atom | binary) => any}) :: {:error, any} | {:ok, any}
@@ -91,6 +93,45 @@ defmodule JohanChallenge.Core.Repositories.Alert do
           |> Repo.preload([:alert_audit, :device])
 
         {:ok, result}
+    end
+  end
+
+  def filter(filters, page_opts) do
+    case filtering(filters, page_opts) do
+      %{entries: []} ->
+        {:error, "Alerts not found"}
+
+      alerts ->
+        {:ok, alerts}
+    end
+  end
+
+  defp filtering(filters, page_opts) do
+    Alert
+    |> build_query(filters)
+    |> Repo.paginate(page_opts)
+  end
+
+  defp incident_filter(query, incident_dt) do
+    query
+    |> where([a], a.incident_dt == ^incident_dt)
+  end
+
+  defp type_filter(query, type) do
+    query
+    |> where([a], a.type == ^type)
+  end
+
+  defp build_query(queryable, filters),
+    do: Enum.reduce(filters, queryable, &apply_filter/2)
+
+  defp apply_filter(clause, query) do
+    case clause do
+      {"at_dt", incident_dt} ->
+        incident_filter(query, incident_dt)
+
+      {"type_key", type} ->
+        type_filter(query, type)
     end
   end
 end
