@@ -2,7 +2,6 @@ defmodule JohanChallenge.Core.Services.Alert do
   @moduledoc """
   Alert's service to handle data and aggregate multiple operations with repositories
   """
-  require Logger
 
   def parse_data(params) do
     raw_data = parse_raw_data(params)

@@ -48,7 +48,8 @@ defmodule JohanChallenge.MixProject do
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
       {:scrivener, "~> 2.0"},
-      {:scrivener_ecto, "~> 2.0"}
+      {:scrivener_ecto, "~> 2.0"},
+      {:mox, "~> 1.0", only: :test}
     ]
   end
 
