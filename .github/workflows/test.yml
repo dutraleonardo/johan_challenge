@@ -60,3 +60,8 @@ jobs:
       - name: Run Tests
         run: |
           mix coveralls.json --warnings-as-errors --raise
+      - name: Upload to Codecov
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov

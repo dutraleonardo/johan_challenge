@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "33473f0b-a196-4475-b575-af86f1418b43",
+		"name": "johan_challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CREATE ALERT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"status\": \"received\",\n  \"api_version\": \"v1\",\n  \"sim_sid\": \"HS1234567890QWERTYUIOP\",\n  \"content\": \"ALERT DT=2015-07-30T20:00:00Z T=FALL VAL=200 LAT=52.1544408 LON=\"7.999999\",\n  \"direction\": \"from_sim\"\n}"
+				},
+				"url": {
+					"raw": "{{LOCAL_URL}}/api/alerts",
+					"host": [
+						"{{LOCAL_URL}}"
+					],
+					"path": [
+						"api",
+						"alerts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SEARCH ALERTS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LOCAL_URL}}/api/alerts?at_dt=2015-07-30T20:00:00Z&type_key=BPM&page=3&page_size=5",
+					"host": [
+						"{{LOCAL_URL}}"
+					],
+					"path": [
+						"api",
+						"alerts"
+					],
+					"query": [
+						{
+							"key": "at_dt",
+							"value": "2015-07-30T20:00:00Z"
+						},
+						{
+							"key": "type_key",
+							"value": "BPM"
+						},
+						{
+							"key": "page",
+							"value": "3"
+						},
+						{
+							"key": "page_size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
