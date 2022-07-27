@@ -17,19 +17,20 @@ defmodule JohanChallengeWeb.AlertsControllerTest do
   setup %{conn: conn} do
     device = build(:device)
     device |> Repo.insert!()
-    payload =
-      %{
-        status: "received",
-        api_version: "v1",
-        sim_sid: device.sim_sid,
-        content: "ALERT DT=2015-07-30T20:00:00Z T=BPM VAL=200 LAT=52.1544408 LON=4.2934847",
-        direction: "from_sim"
-      }
-    invalid_payload =
-      %{
-        sim_sid: Ecto.UUID.generate(),
-        content: "ALERT DT=2015-07-30T20:00:00Z T=BPM VAL=200 LAT=52.1544408",
-      }
+
+    payload = %{
+      status: "received",
+      api_version: "v1",
+      sim_sid: device.sim_sid,
+      content: "ALERT DT=2015-07-30T20:00:00Z T=BPM VAL=200 LAT=52.1544408 LON=4.2934847",
+      direction: "from_sim"
+    }
+
+    invalid_payload = %{
+      sim_sid: Ecto.UUID.generate(),
+      content: "ALERT DT=2015-07-30T20:00:00Z T=BPM VAL=200 LAT=52.1544408"
+    }
+
     %{
       device: device,
       conn: put_req_header(conn, "accept", "application/json"),
@@ -47,27 +48,36 @@ defmodule JohanChallengeWeb.AlertsControllerTest do
       assert String.contains?(response.resp_body, "type")
       assert String.contains?(response.resp_body, "value")
     end
+
     test "send request with invalid payload: device error", %{invalid_payload: invalid_payload, conn: conn} do
       response = post(conn, "/api/alerts", invalid_payload)
       body = Jason.decode!(response.resp_body)
       assert response.status == 400
       assert body["error"] == "Device not found"
     end
-    test "send request with invalid payload: longitude error", %{device: device, invalid_payload: invalid_payload, conn: conn} do
+
+    test "send request with invalid payload: longitude error", %{
+      device: device,
+      invalid_payload: invalid_payload,
+      conn: conn
+    } do
       invalid_payload =
         invalid_payload
         |> Map.put(:sim_sid, device.sim_sid)
+
       response = post(conn, "/api/alerts", invalid_payload)
       body = Jason.decode!(response.resp_body)
       assert response.status == 400
       assert String.contains?(body["error"], "lon: can't be blank")
     end
   end
+
   describe "GET /api/alerts" do
     setup %{device: device} do
       alerts =
         Enum.map(
-          1..10, fn _x ->
+          1..10,
+          fn _x ->
             @valid_alert
             |> Map.put(:device_id, device.id)
             |> AlertRepo.insert_alert()
@@ -85,6 +95,7 @@ defmodule JohanChallengeWeb.AlertsControllerTest do
         "page" => "1",
         "page_size" => "5"
       }
+
       response = get(conn, "/api/alerts", params)
       body = Jason.decode!(response.resp_body)
       assert body["page"] == 1

@@ -11,6 +11,7 @@ defmodule JohanChallengeWeb.AlertsView do
       lon: alert.lon
     }
   end
+
   def render("show.json", %{alerts: alerts}) do
     %{
       data: Enum.map(alerts.entries, fn alert -> render("alert.json", %{alert: alert}) end),

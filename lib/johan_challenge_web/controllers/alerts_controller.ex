@@ -22,10 +22,9 @@ defmodule JohanChallengeWeb.AlertsController do
   @spec show(any, map) :: {:error, <<_::128>>} | Plug.Conn.t()
   def show(conn, %{"page_size" => page_size, "page" => page_number} = params) do
     with {:ok, alerts} <-
-      params
-      |> Map.drop(["page", "page_size"])
-      |> AlertRepo.filter(%{page_size: page_size, page: page_number}) do
-
+           params
+           |> Map.drop(["page", "page_size"])
+           |> AlertRepo.filter(%{page_size: page_size, page: page_number}) do
       conn
       |> put_status(:ok)
       |> render("show.json", alerts: alerts)

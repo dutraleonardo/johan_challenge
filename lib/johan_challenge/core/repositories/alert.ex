@@ -100,6 +100,7 @@ defmodule JohanChallenge.Core.Repositories.Alert do
     case filtering(filters, page_opts) do
       %{entries: []} ->
         {:error, "Alerts not found"}
+
       alerts ->
         {:ok, alerts}
     end
