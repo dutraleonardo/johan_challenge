@@ -28,10 +28,12 @@ defmodule JohanChallenge.Core.Repositories.AlertTest do
     patient =
       build(:patient)
       |> Repo.insert!()
+
     device =
       build(:device)
       |> Map.put(:patient_id, patient.id)
       |> Repo.insert!()
+
     %{device: device}
   end
 
@@ -189,12 +191,14 @@ defmodule JohanChallenge.Core.Repositories.AlertTest do
       assert result == "Alert not found"
     end
   end
+
   describe "get_alert_notification/1" do
     test "get notification message", %{device: device} do
       {:ok, alert} =
         @alert_valid_attrs
         |> Map.put(:device_id, device.id)
         |> AlertRepo.insert_alert()
+
       {status, result} = AlertRepo.get_alert_notification(alert.id)
 
       IO.inspect(result, label: "Notification message")

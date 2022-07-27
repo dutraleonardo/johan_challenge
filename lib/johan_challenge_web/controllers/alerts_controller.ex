@@ -15,7 +15,8 @@ defmodule JohanChallengeWeb.AlertsController do
          {:ok, parsed_data} <- {:ok, AlertService.parse_data(params)},
          {:ok, result} <- parsed_data |> Map.put(:device_id, device_id) |> AlertRepo.insert_alert_with_audit(),
          {:ok, alert_notification} <- AlertRepo.get_alert_notification(result.id),
-         {:ok, %{phone_number: caregiver_phone}} <- CaregiverRepo.get_caregiver_to_patient(alert_notification.patient_id),
+         {:ok, %{phone_number: caregiver_phone}} <-
+           CaregiverRepo.get_caregiver_to_patient(alert_notification.patient_id),
          {:ok, _notificaton} <- SMS.call(alert_notification, caregiver_phone) do
       conn
       |> put_status(:ok)

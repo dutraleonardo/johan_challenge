@@ -14,8 +14,7 @@ defmodule JohanChallengeWeb.AlertsControllerTest do
   }
 
   setup %{conn: conn} do
-    context =
-      build(:all)
+    context = build(:all)
 
     payload = %{
       status: "received",

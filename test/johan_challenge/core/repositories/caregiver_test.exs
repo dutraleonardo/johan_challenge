@@ -7,6 +7,7 @@ defmodule JohanChallenge.Core.Repositories.CaregiverTest do
 
   setup do
     context = build(:all)
+
     %{
       patient: context.patient,
       health_center: context.health_center,

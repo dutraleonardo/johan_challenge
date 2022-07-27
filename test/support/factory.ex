@@ -52,21 +52,26 @@ defmodule JohanChallenge.Factory do
     health_center =
       build(:health_center)
       |> Repo.insert!()
+
     caregiver =
       build(:caregiver)
       |> Map.put(:health_center_id, health_center.id)
       |> Repo.insert!()
+
     patient =
       build(:patient)
       |> Map.put(:health_center_id, health_center.id)
       |> Repo.insert!()
+
     device =
       build(:device)
       |> Map.merge(%{health_center_id: health_center.id, patient_id: patient.id})
       |> Repo.insert!()
+
     alert =
       build(:alert)
       |> Map.put(:device_id, device.id)
+
     %{
       alert: alert,
       health_center: health_center,

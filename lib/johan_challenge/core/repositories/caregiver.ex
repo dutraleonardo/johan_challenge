@@ -1,7 +1,12 @@
 defmodule JohanChallenge.Core.Repositories.Caregiver do
+  @moduledoc """
+  Caregiver's repository. This module handle queries to caregivers' table
+  """
+
   alias JohanChallenge.Repo
   alias JohanChallenge.Core.Schemas.{Caregiver, HealthCenter, Patient}
   import Ecto.Query
+
   def get_caregiver_to_patient(patient_id) do
     case by_patient_id(patient_id) do
       [] ->
@@ -11,6 +16,7 @@ defmodule JohanChallenge.Core.Repositories.Caregiver do
         caregiver =
           caregivers
           |> Enum.random()
+
         {:ok, caregiver}
     end
   end
@@ -25,6 +31,6 @@ defmodule JohanChallenge.Core.Repositories.Caregiver do
       where: patient.id == ^patient_id,
       select: caregivers
     )
-    |> Repo.all
+    |> Repo.all()
   end
 end

@@ -101,6 +101,7 @@ defmodule JohanChallenge.Core.Repositories.Alert do
     result =
       alert_notification_query(alert_id)
       |> Repo.all()
+
     case result do
       [] ->
         {:error, "Alert not found"}
@@ -109,6 +110,7 @@ defmodule JohanChallenge.Core.Repositories.Alert do
         alert =
           alert
           |> hd()
+
         {:ok, alert}
     end
   end
@@ -118,7 +120,7 @@ defmodule JohanChallenge.Core.Repositories.Alert do
       alert in Alert,
       inner_join: device in assoc(alert, :device),
       inner_join: patient in Patient,
-      on: device.patient_id == patient.id ,
+      on: device.patient_id == patient.id,
       where: alert.id == ^alert_id,
       select: %{
         incident_dt: alert.incident_dt,
@@ -127,7 +129,7 @@ defmodule JohanChallenge.Core.Repositories.Alert do
         last_name: patient.last_name,
         additional_info: patient.additional_info,
         patient_id: patient.id
-        }
+      }
     )
   end
 
