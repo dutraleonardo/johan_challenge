@@ -20,3 +20,9 @@ Some strategies can be used to prevent or remediate this situation:
 - Damage containment strategy, if the application becomes unavailable, automatically rebuild and deploy.
 - Choosing a programming language that supports fault-tolerance is helpful (elixir <3)
 - Always guarantee a high code coverage (unit tests and integration tests).
+
+
+### Technical decisions and possible improvements:
+- I chose to implement what was proposed in the challenge description
+- I would add a relationship between caregivers and patients tables (one-to-many)
+- In the implemented flow of deciding which caregiver will be notified when an anomaly is identified with the patient, I selected all caregivers from the health center linked to the patient, and then I picked one of them randomly.
