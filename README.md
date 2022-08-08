@@ -1,5 +1,5 @@
-[![Elixir Build and Test](https://github.com/dutraleonardo/johan_challenge/actions/workflows/test.yml/badge.svg)](https://github.com/dutraleonardo/johan_challenge/actions/workflows/test.yml)
-[![Coverage Status](https://coveralls.io/repos/github/dutraleonardo/johan_challenge/badge.svg?branch=master)](https://coveralls.io/github/dutraleonardo/johan_challenge?branch=master)
+[![build and test](https://github.com/dutraleonardo/johan_challenge/actions/workflows/test.yml/badge.svg)](https://github.com/dutraleonardo/johan_challenge/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/dutraleonardo/johan_challenge/branch/master/graph/badge.svg?token=74XV3VLCCQ)](https://codecov.io/gh/dutraleonardo/johan_challenge)
 # JohanChallenge
 
 ## The Challenge
