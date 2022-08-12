@@ -23,6 +23,8 @@ Some strategies can be used to prevent or remediate this situation:
 
 
 ### Technical decisions and possible improvements:
-- I chose to implement what was proposed in the challenge description
-- I would add a relationship between caregivers and patients tables (one-to-many)
+- I chose to implement what was proposed in the challenge description.
+- I would add a relationship between caregivers and patients tables (one-to-many).
 - In the implemented flow of deciding which caregiver will be notified when an anomaly is identified with the patient, I selected all caregivers from the health center linked to the patient, and then I picked one of them randomly.
+- The "notifier" module is responsible for simulating the module that sends SMS messages. I didn't focus on creating a robust code, but I ensured that the message was being formatted with the correct data.
+- The repository has a GitHub Actions integration with a build and test pipeline that runs before the pull requests can be merged. The next step is to create a step into the pipeline to check a minimum test coverage percent for new code submitted on pull requests, this helps ensure code quality.
